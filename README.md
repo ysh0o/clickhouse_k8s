@@ -119,17 +119,6 @@ clickhouse-client -u user1 --password user1_password --query "SELECT currentUser
 CLICKHOUSE_VERSION="24.3"
 ```
 
-2. В манифесте `k8s/clickhouse-deployment.yaml` отредактировать строку с образом:
-```
-image: clickhouse/clickhouse-server:24.3
-```
-
-3. Применить изменения:
-```
-kubectl -n clickhouse apply -f k8s/clickhouse-deployment.yaml
-```
-
-Так можно указать нужный тег образа ClickHouse.
 
 ## Как удалить установку
 ```
