@@ -18,7 +18,7 @@ spec:
       containers:
         - name: clickhouse
           # Образ ClickHouse. Версию можно менять здесь 
-          image: clickhouse/clickhouse-server:24.3
+          image: clickhouse/clickhouse-server:${CLICKHOUSE_VERSION}
           imagePullPolicy: IfNotPresent
 
           # Порты ClickHouse 
