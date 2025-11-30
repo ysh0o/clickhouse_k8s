@@ -8,17 +8,6 @@
 - Версия ClickHouse задаётся через файл `config.env` и образ `clickhouse/clickhouse-server:<version>`.
 - Пользователи и пароли задаются в `config.env`, из них генерируется `users.xml`, который кладётся в Kubernetes Secret.
 
-## Структура проекта
-
-clickhouse_k8s/
-├── config.env # Параметры: версия, пользователи, namespace
-├── install.sh # Скрипт установки в кластер
-├── k8s/
-│ ├── clickhouse-configmap.yaml # Базовый config.xml для ClickHouse
-│ ├── clickhouse-deployment.yaml # Deployment с одним Pod
-│ └── clickhouse-service.yaml # Service для доступа к ClickHouse
-└── README.md
-
 
 ## Настройка параметров
 
