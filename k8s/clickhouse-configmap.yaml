@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: clickhouse-config
+  namespace: clickhouse         
+data:
+  # Минимальный config.xml для ClickHouse.
+  # Файл попадёт в /etc/clickhouse-server/config.d/config.xml
+  config.xml: |
+    <clickhouse>
+        <logger>
+            <level>information</level>
+            <console>true</console>
+        </logger>
+
+        <!-- Слушаем стандартные порты -->
+        <tcp_port>9000</tcp_port>
+        <http_port>8123</http_port>
+
+        <!-- Разрешаем подключение со всех адресов -->
+        <listen_host>::</listen_host>
+    </clickhouse>
