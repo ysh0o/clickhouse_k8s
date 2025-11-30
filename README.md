@@ -14,7 +14,7 @@
 Файл `config.env`:
 
 Версия образа ClickHouse
-CLICKHOUSE_VERSION="24.3"
+'CLICKHOUSE_VERSION="24.3"'
 
 Основной админ-пользователь
 CH_ADMIN_USER="admin"
