@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: clickhouse
+  namespace: clickhouse         
+  labels:
+    app: clickhouse
+spec:
+  type: ClusterIP                 # Доступ изнутри кластера
+  selector:
+    app: clickhouse               # Должно совпадать с labels в Deployment
+  ports:
+    - name: tcp
+      port: 9000                  # Порт сервиса внутри кластера
+      targetPort: 9000            # Порт контейнера
+    - name: http
+      port: 8123
+      targetPort: 8123
