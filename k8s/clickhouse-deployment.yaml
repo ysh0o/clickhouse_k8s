@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clickhouse
+  namespace: clickhouse        
+  labels:
+    app: clickhouse
+spec:
+  replicas: 1                  # Один pod = single-инсталляция
+  selector:
+    matchLabels:
+      app: clickhouse
+  template:
+    metadata:
+      labels:
+        app: clickhouse
+    spec:
+      containers:
+        - name: clickhouse
+          # Образ ClickHouse. Версию можно менять здесь 
+          image: clickhouse/clickhouse-server:24.3
+          imagePullPolicy: IfNotPresent
+
+          # Порты ClickHouse 
+          ports:
+            - name: tcp
+              containerPort: 9000
+            - name: http
+              containerPort: 8123
+
+          # Монтируем конфиг и пользователей в стандартный путь ClickHouse
+          volumeMounts:
+            - name: clickhouse-config
+              mountPath: /etc/clickhouse-server/config.d
+            - name: clickhouse-users
+              mountPath: /etc/clickhouse-server/users.d
+
+          # Проверка готовности по HTTP-порту
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+
+          # liveness-проба
+          livenessProbe:
+            tcpSocket:
+              port: tcp
+            initialDelaySeconds: 30
+            periodSeconds: 30
+
+      volumes:
+        # ConfigMap с дополнительной конфигурацией ClickHouse
+        - name: clickhouse-config
+          configMap:
+            name: clickhouse-config
+
+        # Secret с файлом users.xml
+        - name: clickhouse-users
+          secret:
+            secretName: clickhouse-users
