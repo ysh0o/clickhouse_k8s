@@ -5,7 +5,7 @@
 ## Что это
 
 - Поднимается один Pod с ClickHouse (single‑instance).
-- Версия ClickHouse задаётся через файл `config.env` и образ `clickhouse/clickhouse-server:<version>`.
+- Версия ClickHouse задаётся через файл `config.env`
 - Пользователи и пароли задаются в `config.env`, из них генерируется `users.xml`, который кладётся в Kubernetes Secret.
 
 
@@ -52,7 +52,7 @@ K8S_NAMESPACE="clickhouse"
 
 Шаги:
 ```
-git clone https://github.com/<your_login>/clickhouse_k8s.git
+git clone https://github.com/ysh0o/clickhouse_k8s.git
 cd clickhouse_k8s
 ```
 
@@ -76,7 +76,7 @@ chmod +x install.sh
 - создаёт namespace ;
 - генерирует файл `users.xml` с пользователями из `config.env`;
 - создаёт/обновляет Secret `clickhouse-users`;
-- применяет манифесты в папке `k8s/` (`ConfigMap`, `Deployment`, `Service`).
+- применяет манифесты (`ConfigMap`, `Deployment`, `Service`).
 
 ## Проверка
 
