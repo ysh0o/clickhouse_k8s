@@ -56,6 +56,9 @@ kubectl -n "${K8S_NAMESPACE}" create secret generic clickhouse-users \
 
 echo "Secret clickhouse-users создан."
 
+# Подставляем версию ClickHouse в манифест Deployment
+envsubst < k8s/clickhouse-deployment.yaml > /tmp/clickhouse-deployment.rendered.yaml
+
 # Применяем манифесты Kubernetes 
 kubectl -n "${K8S_NAMESPACE}" apply -f k8s/clickhouse-configmap.yaml
 kubectl -n "${K8S_NAMESPACE}" apply -f k8s/clickhouse-deployment.yaml
