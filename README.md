@@ -1,4 +1,4 @@
-# ClickHouse in Kubernetes (single instance)
+# ClickHouse in Kubernetes 
 
 Простая установка одиночного инстанса ClickHouse в Kubernetes с параметрами версии и пользователей.
 
