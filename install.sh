@@ -7,7 +7,7 @@ set -e  # Если какая-то команда падает - скрипт з
 source ./config.env
 
 # Проверяем, что kubectl доступен
-if ! command -f kubectl >/dev/null 2>&1; then
+if ! command -v kubectl >/dev/null 2>&1; then
   echo "Установите kubectl."
   exit 1
 fi
