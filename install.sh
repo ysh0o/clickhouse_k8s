@@ -5,6 +5,7 @@ set -e  # Если какая-то команда падает - скрипт з
 
 # Загружаем переменные из config.env 
 source ./config.env
+export CLICKHOUSE_VERSION
 
 # Проверяем, что kubectl доступен
 if ! command -v kubectl >/dev/null 2>&1; then
@@ -61,7 +62,7 @@ envsubst < k8s/clickhouse-deployment.yaml > /tmp/clickhouse-deployment.rendered.
 
 # Применяем манифесты Kubernetes 
 kubectl -n "${K8S_NAMESPACE}" apply -f k8s/clickhouse-configmap.yaml
-kubectl -n "${K8S_NAMESPACE}" apply -f k8s/clickhouse-deployment.yaml
+kubectl -n "${K8S_NAMESPACE}" apply -f /tmp/clickhouse-deployment.rendered.yaml
 kubectl -n "${K8S_NAMESPACE}" apply -f k8s/clickhouse-service.yaml
 
 echo "=== Установка завершена. Проверьте pod и сервис: ==="
